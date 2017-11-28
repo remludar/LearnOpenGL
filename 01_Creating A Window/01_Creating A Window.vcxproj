@@ -117,14 +117,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\Downloads\glad\src\glad.c" />
-    <ClCompile Include="testcpp.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="src\testcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\fragment.shader" />
     <None Include="res\shaders\vertex.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\img\container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
