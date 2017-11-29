@@ -1,6 +1,9 @@
-#include "glad/glad.h"
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "stb_image.h"
+#include <stb_image.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "Shader.h"
 
@@ -58,11 +61,11 @@ int main()
 	// setup vertex data
 	// -----------------
 	float vertices[] = {
-		// positions			// colors			// texture coords
-		-0.5f, -0.5f, +0.0f,	0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	
-		+0.5f, -0.5f, +0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,
-		+0.5f, +0.5f, +0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,
-		-0.5f, +0.5f, +0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f
+		// positions			// texture coords
+		-0.5f, -0.5f, +0.0f,	0.0f, 0.0f,	
+		+0.5f, -0.5f, +0.0f,	1.0f, 0.0f,
+		+0.5f, +0.5f, +0.0f,	1.0f, 1.0f,
+		-0.5f, +0.5f, +0.0f,	0.0f, 1.0f
 	};
 
 	unsigned int indices[] = {
@@ -87,12 +90,10 @@ int main()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	
 	// define the layout of the data in the vbo and enable the vertex attributes for the shader 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
 
 	// unbind from vbo and vao
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -160,6 +161,11 @@ int main()
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
 
+
+	
+
+	
+
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
@@ -167,7 +173,10 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		
+		// glm transformations
+		glm::mat4 trans;
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		ourShader.setMat4("transform", trans);
 
 		// render the triangle
 		glActiveTexture(GL_TEXTURE0);
