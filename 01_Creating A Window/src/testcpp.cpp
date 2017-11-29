@@ -54,29 +54,77 @@ int main()
 		return -1;
 	}
 
+	// configure global opengl state
+	// -----------------------------
+	glEnable(GL_DEPTH_TEST);
+
 	// create shader
 	Shader ourShader("res/shaders/vertex.shader", "res/shaders/fragment.shader");
 	
-
 	// setup vertex data
 	// -----------------
 	float vertices[] = {
-		// positions			// texture coords
-		-0.5f, -0.5f, +0.0f,	0.0f, 0.0f,	
-		+0.5f, -0.5f, +0.0f,	1.0f, 0.0f,
-		+0.5f, +0.5f, +0.0f,	1.0f, 1.0f,
-		-0.5f, +0.5f, +0.0f,	0.0f, 1.0f
+		//positions				// text coords
+		-0.5f, -0.5f, -0.5f,	0.0f, 0.0f,
+		+0.5f, -0.5f, -0.5f,	1.0f, 0.0f,
+		+0.5f, +0.5f, -0.5f,	1.0f, 1.0f,
+		+0.5f, +0.5f, -0.5f,	1.0f, 1.0f,
+		-0.5f, +0.5f, -0.5f,	0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,	0.0f, 0.0f,
+
+		-0.5f, -0.5f, +0.5f,	0.0f, 0.0f,
+		+0.5f, -0.5f, +0.5f,	1.0f, 0.0f,
+		+0.5f, +0.5f, +0.5f,	1.0f, 1.0f,
+		+0.5f, +0.5f, +0.5f,	1.0f, 1.0f,
+		-0.5f, +0.5f, +0.5f,	0.0f, 1.0f,
+		-0.5f, -0.5f, +0.5f,	0.0f, 0.0f,
+
+		-0.5f, +0.5f, +0.5f,	1.0f, 0.0f,
+		-0.5f, +0.5f, -0.5f,	1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,	0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,	0.0f, 1.0f,
+		-0.5f, -0.5f, +0.5f,	0.0f, 0.0f,
+		-0.5f, +0.5f, +0.5f,	1.0f, 0.0f,
+
+		+0.5f, +0.5f, +0.5f,	1.0f, 0.0f,
+		+0.5f, +0.5f, -0.5f,	1.0f, 1.0f,
+		+0.5f, -0.5f, -0.5f,	0.0f, 1.0f,
+		+0.5f, -0.5f, -0.5f,	0.0f, 1.0f,
+		+0.5f, -0.5f, +0.5f,	0.0f, 0.0f,
+		+0.5f, +0.5f, +0.5f,	1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,	0.0f, 1.0f,
+		+0.5f, -0.5f, -0.5f,	1.0f, 1.0f,
+		+0.5f, -0.5f, +0.5f,	1.0f, 0.0f,
+		+0.5f, -0.5f, +0.5f,	1.0f, 0.0f,
+		-0.5f, -0.5f, +0.5f,	0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,	0.0f, 1.0f,
+
+		-0.5f, +0.5f, -0.5f,	0.0f, 1.0f,
+		+0.5f, +0.5f, -0.5f,	1.0f, 1.0f,
+		+0.5f, +0.5f, +0.5f,	1.0f, 0.0f,
+		+0.5f, +0.5f, +0.5f,	1.0f, 0.0f,
+		-0.5f, +0.5f, +0.5f,	0.0f, 0.0f,
+		-0.5f, +0.5f, -0.5f,	0.0f, 1.0f
 	};
 
-	unsigned int indices[] = {
-		0,1,2,
-		2,3,0
+	glm::vec3 cubePositions[] = {
+		glm::vec3(+0.0f, +0.0f, +0.0f),
+		glm::vec3(+2.0f, +5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(+2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f, +3.0f, -7.5f),
+		glm::vec3(+1.3f, -2.0f, -2.5f),
+		glm::vec3(+1.5f, +2.0f, -2.5f),
+		glm::vec3(+1.5f, +0.2f, -1.5f),
+		glm::vec3(-1.3f, +1.0f, -1.5f)
 	};
 
-	unsigned int VAO, VBO, EBO;
+	unsigned int VAO, VBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+
 
 	// bind to vao
 	glBindVertexArray(VAO);
@@ -84,11 +132,7 @@ int main()
 	// bind to vbo and fill buffer
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	
-	// bind to ebo and fill buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	
+		
 	// define the layout of the data in the vbo and enable the vertex attributes for the shader 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -161,30 +205,43 @@ int main()
 	ourShader.setInt("texture1", 0);
 	ourShader.setInt("texture2", 1);
 
-
-	
-
-	
-
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// glm transformations
-		glm::mat4 trans;
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		ourShader.setMat4("transform", trans);
-
-		// render the triangle
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture[0]);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture[1]);
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		glm::mat4 view;
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		ourShader.setMat4("view", view);
+
+		glm::mat4 projection;
+		projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		ourShader.setMat4("projection", projection);
+
+		// render the triangle
+		glBindVertexArray(VAO);
+		for (unsigned int i = 0; i < 10; i++)
+		{
+			//transformations
+			glm::mat4 model;
+			model = glm::translate(model, cubePositions[i]);
+			float angle = 20.0f * (i + 1);
+			model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			ourShader.setMat4("model", model);
+
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		}
+		
 
 		// swap buffer and poll IO events
 		glfwSwapBuffers(window);
