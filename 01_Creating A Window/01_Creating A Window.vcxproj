@@ -129,6 +129,7 @@
     <ClCompile Include="src\testcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\Shader.h" />
   </ItemGroup>
