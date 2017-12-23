@@ -17,12 +17,19 @@ public:
 	~Mesh();
 
 	void Generate(std::vector<float> vertices);
+	void Generate(std::vector<float> vertices, std::vector<int> attributeStrides);
 	void Render();
 
-	// GETTER
+	//GETTER
 	Material* GetMaterial()
 	{
 		return m_pMaterial;
+	}
+
+	//SETTER
+	void SetMaterialShader(Shader::Type type)
+	{
+		m_pMaterial = new Material(type);
 	}
 
 };

@@ -137,6 +137,8 @@
   <ItemGroup>
     <None Include="res\shaders\defaultFragment.shader" />
     <None Include="res\shaders\defaultVertex.shader" />
+    <None Include="res\shaders\texturefragment.shader" />
+    <None Include="res\shaders\textureVertex.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\InputManager.h" />

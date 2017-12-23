@@ -12,6 +12,11 @@
 class Shader
 {
 public:
+	static enum Type
+	{
+		COLOR,
+		TEXTURE
+	};
 	// program ID
 	unsigned int ID;
 
@@ -24,5 +29,10 @@ public:
 	void setMat4(const std::string &name, glm::mat4 value) const
 	{
 		glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+	}
+
+	void setInt(const std::string &name, int value) const
+	{
+		glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 	}
 };
