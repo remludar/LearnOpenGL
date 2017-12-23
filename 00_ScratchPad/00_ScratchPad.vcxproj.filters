@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\deps\glad.c" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameWindow.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Material.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\img\awesomeface.png" />
+    <Image Include="res\img\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\defaultVertex.shader" />
+    <None Include="res\shaders\defaultFragment.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GameWindow.h" />
+    <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Material.h" />
+    <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\InputManager.h" />
+  </ItemGroup>
+</Project>

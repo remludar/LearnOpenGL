@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3F03F75F-5CF7-42DE-B331-92A11B523974}</ProjectGuid>
-    <RootNamespace>My01_CreatingAWindow</RootNamespace>
+    <ProjectGuid>{3F8A584A-6F7E-407F-9C5D-AB788C273007}</ProjectGuid>
+    <RootNamespace>My00_ScratchPad</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,11 +72,6 @@
     <IncludePath>$(SolutionDir)deps\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -93,9 +88,6 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -125,21 +117,39 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\deps\glad.c" />
+    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Material.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\GameWindow.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
-    <ClCompile Include="src\testcpp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\stb_image.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\shaders\fragment.shader" />
-    <None Include="res\shaders\vertex.shader" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\img\awesomeface.png" />
     <Image Include="res\img\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\defaultFragment.shader" />
+    <None Include="res\shaders\defaultVertex.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Material.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\GameWindow.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
