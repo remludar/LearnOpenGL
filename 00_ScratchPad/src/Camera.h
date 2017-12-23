@@ -43,4 +43,10 @@ public:
 	{
 		return m_fSpeed;
 	}
+
+	//SETTERS
+	void SetFront(glm::vec3 f)
+	{
+		m_vec3Front = f;
+	}
 };

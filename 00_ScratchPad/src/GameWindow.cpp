@@ -1,3 +1,6 @@
+#include <glm/glm.hpp>
+
+#include "Game.h"
 #include "InputManager.h"
 #include "GameWindow.h"
 
@@ -24,6 +27,9 @@ void GameWindow::Create(unsigned int width, unsigned int height, const char* tit
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(m_pWindow);
+	glfwSetFramebufferSizeCallback(m_pWindow, framebuffer_size_callback);
+	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(m_pWindow, mouse_callback);
 }
 
 void GameWindow::Render()
@@ -45,7 +51,43 @@ void GameWindow::Update()
 	glfwPollEvents();
 }
 
-void GameWindow::Close()
+void GameWindow::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
+	glViewport(0, 0, width, height);
+}
+
+void GameWindow::mouse_callback(GLFWwindow *window, double xpos, double ypos)
+{
+	auto inputManager = InputManager::Instance();
+	auto camera = Game::Instance()->GetMainCamera();
 	
+	if (inputManager->IsFirstMouse())
+	{
+		inputManager->SetLastMouseX(xpos);
+		inputManager->SetLastMouseY(ypos);
+		inputManager->SetIsFirstMouse(false);
+	}
+
+	float xoffset = xpos - inputManager->GetLastMouseX();
+	float yoffset = inputManager->GetLastMouseY() - ypos;
+	inputManager->SetLastMouseX(xpos);
+	inputManager->SetLastMouseY(ypos);
+
+	float sensitivity = 0.05f;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	inputManager->SetYaw(inputManager->GetYaw() + xoffset);
+	inputManager->SetPitch(inputManager->GetPitch() + yoffset);
+
+	if (inputManager->GetPitch() > 89.0f)
+		inputManager->SetPitch(89.0f);
+	if (inputManager->GetPitch() < -89.0f)
+		inputManager->SetPitch(-89.0f);
+
+	glm::vec3 front;
+	front.x = cos(glm::radians(inputManager->GetYaw())) * cos(glm::radians(inputManager->GetPitch()));
+	front.y = sin(glm::radians(inputManager->GetPitch()));
+	front.z = sin(glm::radians(inputManager->GetYaw())) * cos(glm::radians(inputManager->GetPitch()));
+	camera->SetFront(glm::normalize(front));
 }

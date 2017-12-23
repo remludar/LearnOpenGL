@@ -21,7 +21,6 @@ public:
 	void Create(unsigned int width, unsigned int height, const char* title);
 	void Render();
 	void Update();
-	void Close();
 
 	// GETTERS
 	unsigned int GetWidth()
@@ -38,6 +37,8 @@ public:
 	}
 
 private:
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	static void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 	unsigned int m_uiWidth;
 	unsigned int m_uiHeight;
 	GLFWwindow* m_pWindow;

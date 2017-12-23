@@ -45,6 +45,7 @@ void Game::AddGameObject(GameObject* gameObject)
 
 void Game::Run()
 {
+	
 	while (!glfwWindowShouldClose(m_pGameWindow->GetGLFWWindow()))
 	{
 		m_pInputManager->ProcessInput();

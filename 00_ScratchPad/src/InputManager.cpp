@@ -21,6 +21,12 @@ struct InputManager::Impl
 	bool m_bIsD;
 	bool m_bIsE;
 	bool m_bIsQ;
+
+	bool isFirstMouse = true;
+	float lastMouseX = 400.0f;
+	float lastMouseY = 300.0f;
+	float pitch = 0.0f;
+	float yaw = -90.0f;
 };
 
 //CONSTRUCTORS
@@ -48,9 +54,6 @@ void InputManager::ProcessInput()
 	m_pImpl->m_bIsD = glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS;
 	m_pImpl->m_bIsE = glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS;
 	m_pImpl->m_bIsQ = glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS;
-
-	
-
 }
 
 bool InputManager::isEsc()
@@ -80,4 +83,46 @@ bool InputManager::IsE()
 bool InputManager::IsQ()
 {
 	return m_pImpl->m_bIsQ;
+}
+
+bool InputManager::IsFirstMouse()
+{
+	return m_pImpl->isFirstMouse;
+}
+float InputManager::GetLastMouseX()
+{
+	return m_pImpl->lastMouseX;
+}
+float InputManager::GetLastMouseY()
+{
+	return m_pImpl->lastMouseY;
+}
+float InputManager::GetPitch()
+{
+	return m_pImpl->pitch;
+}
+float InputManager::GetYaw()
+{
+	return m_pImpl->yaw;
+}
+
+void InputManager::SetIsFirstMouse(bool b)
+{
+	m_pImpl->isFirstMouse = b;
+}
+void InputManager::SetLastMouseX(float x)
+{
+	m_pImpl->lastMouseX = x;
+}
+void InputManager::SetLastMouseY(float y)
+{
+	m_pImpl->lastMouseY = y;
+}
+void InputManager::SetPitch(float p)
+{
+	m_pImpl->pitch = p;
+}
+void InputManager::SetYaw(float y)
+{
+	m_pImpl->yaw = y;
 }

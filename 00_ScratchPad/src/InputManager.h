@@ -28,6 +28,17 @@ public:
 	bool IsE();
 	bool IsQ();
 
+	bool IsFirstMouse();
+	float GetLastMouseX();
+	float GetLastMouseY();
+	float GetPitch();
+	float GetYaw();
+
+	void SetIsFirstMouse(bool b);
+	void SetLastMouseX(float x);
+	void SetLastMouseY(float y);
+	void SetPitch(float p);
+	void SetYaw(float y);
 
 private:
 	struct Impl;
