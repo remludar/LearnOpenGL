@@ -21,7 +21,8 @@ GameObject::~GameObject()
 	delete m_pImpl->m_pTransform;
 	delete m_pImpl->m_pMesh;
 }
-GameObject::GameObject(const GameObject& other): m_pImpl(new Impl(*other.m_pImpl)){}
+GameObject::GameObject(const GameObject& other): m_pImpl(new Impl(*other.m_pImpl))
+{}
 GameObject& GameObject::operator=(GameObject rhs)
 {
 	swap(m_pImpl, rhs.m_pImpl);
@@ -64,18 +65,21 @@ void GameObject::Render()
 
 	m_pImpl->m_pMesh->Render();
 }
+void GameObject::AddNewMesh()
+{
+	m_pImpl->m_pMesh = new Mesh;
+}
 
 //GETTERS
 Transform* GameObject::GetTransform()
 {
 	return m_pImpl->m_pTransform;
 }
-
-//SETTERS
-void GameObject::SetMesh(Mesh* mesh)
+Mesh* GameObject::GetMesh()
 {
-	m_pImpl->m_pMesh = mesh;
+	return m_pImpl->m_pMesh;
 }
+
 
 
 

@@ -15,7 +15,8 @@ public:
 	static enum Type
 	{
 		COLOR,
-		TEXTURE
+		TEXTURE,
+		MIXED
 	};
 	// program ID
 	unsigned int ID;

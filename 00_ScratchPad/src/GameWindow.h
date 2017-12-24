@@ -22,7 +22,7 @@ public:
 	void Render();
 	void Update();
 
-	// GETTERS
+	//GETTERS
 	unsigned int GetWidth()
 	{
 		return m_uiWidth;

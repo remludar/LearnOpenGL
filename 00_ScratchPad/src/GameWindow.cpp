@@ -30,6 +30,10 @@ void GameWindow::Create(unsigned int width, unsigned int height, const char* tit
 	glfwSetFramebufferSizeCallback(m_pWindow, framebuffer_size_callback);
 	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(m_pWindow, mouse_callback);
+
+	//Center the window
+	auto vm = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	glfwSetWindowPos(m_pWindow, (vm->width / 2) - (m_uiWidth / 2), (vm->height / 2) - (m_uiHeight / 2));
 }
 
 void GameWindow::Render()

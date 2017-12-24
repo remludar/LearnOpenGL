@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <memory>
+#include <time.h>
 
 class GameObject
 {
@@ -22,12 +23,12 @@ public:
 
 	void Update();
 	void Render();
+	void AddNewMesh();
 
 	//GETTERS
 	Transform* GetTransform();
-
-	//SETTERS
-	void SetMesh(Mesh* mesh);
+	Mesh* GetMesh();
+	
 
 private:
 	struct Impl;

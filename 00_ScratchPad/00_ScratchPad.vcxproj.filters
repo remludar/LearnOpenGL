@@ -24,6 +24,8 @@
     <None Include="res\shaders\defaultFragment.shader" />
     <None Include="res\shaders\textureVertex.shader" />
     <None Include="res\shaders\texturefragment.shader" />
+    <None Include="res\shaders\mixedVertex.shader" />
+    <None Include="res\shaders\mixedFragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
