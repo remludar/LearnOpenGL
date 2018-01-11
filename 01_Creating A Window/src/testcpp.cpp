@@ -243,7 +243,7 @@ int main()
 		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 		ourShader.setMat4("view", view);
 
-		// render the triangle
+		// render the boxes
 		glBindVertexArray(VAO);
 		for (unsigned int i = 0; i < 10; i++)
 		{
@@ -255,7 +255,6 @@ int main()
 			ourShader.setMat4("model", model);
 
 			glDrawArrays(GL_TRIANGLES, 0, 36);
-
 		}
 		
 
